@@ -23,8 +23,11 @@ public class Program {
         System.out.print("Enter number of installments: ");
         int n = sc.nextInt();
 
+
+
         // Imprimir na tela
         System.out.print("Installments:");
+        System.out.println("");
 
         sc.close();
     }
