@@ -1,5 +1,9 @@
 package application;
 
+import model.entities.Installment;
+import model.services.ContractService;
+import model.services.PaypalService;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,14 +24,26 @@ public class Program {
         Date date = sdf.parse(sc.next());
         System.out.print("Contract value: ");
         double totalValue = sc.nextDouble();
+
+        // Instanciar o contrato (sem as parcelas, pq é lista) / Cabeçalho
+        entities.Contract contract = new entities.Contract(number,date,totalValue);
+
         System.out.print("Enter number of installments: ");
         int n = sc.nextInt();
 
+        // Lógica deste instanciamento: / Parcelas
+        // O instanciamento é feito pelo serviço ContractService (pois a adição de parcelas está nele)
+        // chamo ContractService informando qual é o serviço a ser usado
+        ContractService contractService = new ContractService(new PaypalService());
 
+        // Processar o contrato
+        contractService.processContract(contract,n);
 
         // Imprimir na tela
-        System.out.print("Installments:");
-        System.out.println("");
+        System.out.println("Installments:");
+        for (Installment x : contract.getInstallments()) {
+            System.out.println(x);
+        }
 
         sc.close();
     }

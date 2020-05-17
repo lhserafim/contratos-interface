@@ -13,7 +13,7 @@ public class ContractService {
     }
 
     // Colocar lógica p/ calcular vencimentos e taxas
-    private void processContract(entities.Contract contract, int months) {
+    public void processContract(entities.Contract contract, int months) {
         double basicQuota = contract.getTotalValue() / months;
         // Fazer for p/ poder trabalhar com parcelas
         for (int i = 1; i <= months; i++) {
